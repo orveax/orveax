@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07101d" />
+  <meta name="description" content="ORVEAX helps growing companies structure how they operate and build the operational and digital foundation required for clearer execution and controlled growth." />
+  <meta property="og:title" content="ORVEAX | Business Structuring & Digital Foundation" />
+  <meta property="og:description" content="Foundation to Function. Business Structuring & Digital Foundation for growing companies." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://orveax.com/" />
+  <link rel="canonical" href="https://orveax.com/" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>ORVEAX | Business Structuring & Digital Foundation</title>
+
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg-soft: #0b1626;
+      --panel: rgba(255, 255, 255, 0.035);
+      --line: rgba(255, 255, 255, 0.105);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --text: #f2f5f9;
+      --muted: #9ba9bb;
+      --muted-2: #718096;
+      --accent: #77b7ff;
+      --accent-soft: rgba(119, 183, 255, 0.15);
+      --success: #8fd4b0;
+      --shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --container: 1220px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      background:
+        radial-gradient(circle at 78% 16%, rgba(67, 129, 201, 0.13), transparent 28rem),
+        radial-gradient(circle at 20% 85%, rgba(41, 83, 126, 0.10), transparent 26rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans Arabic", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .28;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.18) 78%, transparent);
+    }
+
+    a { color: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .page {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin-inline: auto;
+    }
+
+    header {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.055);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      letter-spacing: .19em;
+      font-weight: 740;
+      font-size: 16px;
+    }
+
+    .wordmark-mark {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,.028);
+    }
+
+    .wordmark-mark::before,
+    .wordmark-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(119, 183, 255, .72);
+    }
+
+    .wordmark-mark::before { width: 13px; height: 13px; }
+    .wordmark-mark::after { width: 3px; height: 3px; background: var(--accent); box-shadow: 0 0 16px var(--accent); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(143,212,176,.09);
+    }
+
+    .lang-toggle {
+      appearance: none;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,.025);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .lang-toggle:hover { border-color: var(--line-strong); background: rgba(255,255,255,.05); }
+    .lang-toggle:active { transform: translateY(1px); }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 58px 0 42px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(390px, .85fr);
+      align-items: center;
+      gap: clamp(42px, 6vw, 92px);
+    }
+
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--accent);
+      font-size: 12px;
+      line-height: 1.45;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-weight: 720;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(58px, 7.2vw, 108px);
+      line-height: .9;
+      letter-spacing: -.065em;
+      max-width: 820px;
+      font-weight: 720;
+      text-wrap: balance;
+    }
+
+    h1 span { display: block; }
+
+    .lead {
+      max-width: 700px;
+      margin: 30px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 1.5vw, 20px);
+      line-height: 1.7;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      text-decoration: none;
+      border-radius: 13px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .22s var(--ease), background .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #06111d;
+      background: #eef5fd;
+      border-color: #eef5fd;
+      box-shadow: 0 12px 34px rgba(119, 183, 255, .12);
+    }
+
+    .btn-primary:hover { box-shadow: 0 16px 42px rgba(119, 183, 255, .18); }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.025);
+    }
+
+    .btn-secondary[aria-disabled="true"] {
+      opacity: .5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .philosophy {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      color: #c2cbd7;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .philosophy .step { white-space: nowrap; }
+    .philosophy .connector { color: var(--muted-2); letter-spacing: 0; }
+
+    .build-note {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .build-note::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .visual {
+      min-height: 520px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .system-panel {
+      width: min(100%, 500px);
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.012)),
+        rgba(8, 19, 33, .74);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .system-panel::before,
+    .system-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    .system-panel::before {
+      background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: .72;
+    }
+
+    .system-panel::after {
+      background: radial-gradient(circle at center, rgba(80, 145, 217, .10), transparent 58%);
+      pointer-events: none;
+    }
+
+    .system-label {
+      position: absolute;
+      z-index: 3;
+      left: 22px;
+      top: 20px;
+      font-size: 10px;
+      color: var(--muted-2);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .system-id {
+      position: absolute;
+      z-index: 3;
+      right: 22px;
+      bottom: 20px;
+      font-size: 10px;
+      color: var(--muted-2);
+      letter-spacing: .11em;
+    }
+
+    .network {
+      position: absolute;
+      inset: 10%;
+      z-index: 2;
+    }
+
+    .network svg { width: 100%; height: 100%; overflow: visible; }
+
+    .network line,
+    .network path {
+      stroke: rgba(143, 185, 230, .34);
+      stroke-width: 1.1;
+      fill: none;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 5 7;
+      animation: drift 20s linear infinite;
+    }
+
+    .network circle {
+      fill: #0b1727;
+      stroke: rgba(168, 205, 245, .72);
+      stroke-width: 1.4;
+      vector-effect: non-scaling-stroke;
+      filter: drop-shadow(0 0 10px rgba(119,183,255,.18));
+    }
+
+    .network circle.core {
+      fill: rgba(119, 183, 255, .22);
+      stroke: var(--accent);
+      stroke-width: 1.8;
+    }
+
+    .axis {
+      position: absolute;
+      background: rgba(119,183,255,.18);
+      z-index: 1;
+    }
+
+    .axis-x { left: 9%; right: 9%; top: 50%; height: 1px; }
+    .axis-y { top: 9%; bottom: 9%; left: 50%; width: 1px; }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.065);
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-meta a { text-decoration: none; }
+    .footer-meta a:hover { color: var(--text); }
+
+    @keyframes drift {
+      to { stroke-dashoffset: -240; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro { animation: fadeUp .7s var(--ease) both; }
+    .visual { animation: fadeUp .9s .12s var(--ease) both; }
+
+    html[dir="rtl"] .eyebrow { letter-spacing: 0; text-transform: none; font-size: 14px; }
+    html[dir="rtl"] .lead { line-height: 1.9; }
+    html[dir="rtl"] h1 { letter-spacing: -.045em; }
+    html[dir="rtl"] .philosophy { letter-spacing: 0; text-transform: none; font-size: 13px; }
+
+    @media (max-width: 980px) {
+      main { padding-top: 44px; align-items: start; }
+      .hero { grid-template-columns: 1fr; gap: 30px; }
+      .intro { max-width: 760px; }
+      .visual { min-height: 330px; }
+      .system-panel { width: min(100%, 520px); aspect-ratio: 16 / 9; }
+      h1 { font-size: clamp(54px, 13vw, 88px); }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 28px), var(--container)); }
+      header { min-height: 78px; }
+      .status-pill { display: none; }
+      main { padding: 38px 0 30px; }
+      .hero { gap: 24px; }
+      .eyebrow { margin-bottom: 17px; max-width: 300px; }
+      h1 { font-size: clamp(48px, 16vw, 70px); }
+      .lead { margin-top: 22px; font-size: 16px; line-height: 1.65; }
+      .actions { margin-top: 26px; display: grid; grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .philosophy { margin-top: 30px; gap: 7px; font-size: 10px; }
+      .visual { min-height: 260px; margin-top: 4px; }
+      .system-panel { width: 100%; aspect-ratio: 1.35 / 1; border-radius: 22px; }
+      .system-label { left: 17px; top: 15px; }
+      .system-id { right: 17px; bottom: 15px; }
+      .footer-inner { padding: 19px 0; min-height: auto; align-items: flex-start; }
+      .footer-meta { gap: 12px 18px; }
+    }
+
+    @media (max-width: 360px) {
+      .wordmark { font-size: 14px; letter-spacing: .15em; }
+      .wordmark-mark { width: 27px; height: 27px; }
+      .lang-toggle { padding: 8px 10px; }
+      h1 { font-size: 46px; }
+      .philosophy { align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container header-inner">
+        <a class="wordmark" href="/" aria-label="ORVEAX home">
+          <span class="wordmark-mark" aria-hidden="true"></span>
+          <span>ORVEAX</span>
+        </a>
+
+        <div class="header-actions">
+          <span class="status-pill" aria-hidden="true">
+            <span class="status-dot"></span>
+            <span data-copy="statusShort">In development</span>
+          </span>
+          <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">AR</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container hero">
+        <section class="intro" aria-labelledby="heroTitle">
+          <p class="eyebrow" data-copy="eyebrow">Business Structuring &amp; Digital Foundation</p>
+
+          <h1 id="heroTitle" aria-label="Foundation to Function">
+            <span>Foundation</span>
+            <span>to Function.</span>
+          </h1>
+
+          <p class="lead" data-copy="lead">
+            ORVEAX helps growing companies structure how they operate and build the operational and digital foundation required for clearer execution and controlled growth.
+          </p>
+
+          <div class="actions">
+            <a
+              class="btn btn-primary"
+              id="conversationCta"
+              href="mailto:hello@orveax.com?subject=Book%20a%20Conversation%20with%20ORVEAX"
+              data-copy="cta"
+            >Book a Conversation</a>
+
+            <a
+              class="btn btn-secondary"
+              id="linkedinCta"
+              href="#"
+              aria-disabled="true"
+              tabindex="-1"
+              title="Founder LinkedIn profile URL pending verification"
+            >LinkedIn ↗</a>
+          </div>
+
+          <div class="philosophy" aria-label="ORVEAX approach">
+            <span class="step" data-copy="step1">Understand</span>
+            <span class="connector">—</span>
+            <span class="step" data-copy="step2">Design</span>
+            <span class="connector">—</span>
+            <span class="step" data-copy="step3">Build</span>
+            <span class="connector">—</span>
+            <span class="step" data-copy="step4">Enable</span>
+          </div>
+
+          <p class="build-note" data-copy="statusLong">New ORVEAX digital presence in development.</p>
+        </section>
+
+        <aside class="visual" aria-hidden="true">
+          <div class="system-panel">
+            <div class="system-label">Operating Architecture / 01</div>
+            <div class="axis axis-x"></div>
+            <div class="axis axis-y"></div>
+
+            <div class="network">
+              <svg viewBox="0 0 100 100" role="img" aria-label="Connected operating system map">
+                <path d="M14 26 L37 18 L56 31 L78 20 L86 47 L72 69 L48 80 L25 67 L14 26" />
+                <path d="M37 18 L34 48 L56 31 L52 57 L72 69 M34 48 L25 67 M52 57 L48 80 M34 48 L52 57 L86 47" />
+                <circle cx="14" cy="26" r="2.3" />
+                <circle cx="37" cy="18" r="2.3" />
+                <circle cx="56" cy="31" r="2.6" />
+                <circle cx="78" cy="20" r="2.3" />
+                <circle cx="86" cy="47" r="2.6" />
+                <circle class="core" cx="52" cy="57" r="4" />
+                <circle cx="72" cy="69" r="2.5" />
+                <circle cx="48" cy="80" r="2.3" />
+                <circle cx="25" cy="67" r="2.4" />
+                <circle cx="34" cy="48" r="2.6" />
+              </svg>
+            </div>
+
+            <div class="system-id">ORVEAX / SYSTEM VIEW</div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <span>© 2026 ORVEAX</span>
+        <div class="footer-meta">
+          <a href="https://orveax.com/">orveax.com</a>
+          <a href="mailto:hello@orveax.com">hello@orveax.com</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const copy = {
+      en: {
+        dir: 'ltr',
+        toggle: 'AR',
+        eyebrow: 'Business Structuring & Digital Foundation',
+        lead: 'ORVEAX helps growing companies structure how they operate and build the operational and digital foundation required for clearer execution and controlled growth.',
+        cta: 'Book a Conversation',
+        step1: 'Understand',
+        step2: 'Design',
+        step3: 'Build',
+        step4: 'Enable',
+        statusShort: 'In development',
+        statusLong: 'New ORVEAX digital presence in development.',
+        mailSubject: 'Book a Conversation with ORVEAX'
+      },
+      ar: {
+        dir: 'rtl',
+        toggle: 'EN',
+        eyebrow: 'هيكلة الأعمال وبناء الأساس الرقمي',
+        lead: 'تساعد ORVEAX الشركات النامية على تنظيم طريقة عملها وبناء الأساس التشغيلي والرقمي اللازم لتنفيذ أكثر وضوحًا ونمو أكثر انضباطًا.',
+        cta: 'رتّب محادثة',
+        step1: 'نفهم',
+        step2: 'نصمّم',
+        step3: 'نبني',
+        step4: 'نُمكّن',
+        statusShort: 'قيد التطوير',
+        statusLong: 'الحضور الرقمي الجديد لـ ORVEAX قيد التطوير.',
+        mailSubject: 'طلب ترتيب محادثة مع ORVEAX'
+      }
+    };
+
+    const langToggle = document.getElementById('langToggle');
+    const conversationCta = document.getElementById('conversationCta');
+    let currentLang = localStorage.getItem('orveax-lang') === 'ar' ? 'ar' : 'en';
+
+    function applyLanguage(lang) {
+      const selected = copy[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = selected.dir;
+      langToggle.textContent = selected.toggle;
+
+      document.querySelectorAll('[data-copy]').forEach((element) => {
+        const key = element.dataset.copy;
+        if (selected[key]) element.textContent = selected[key];
+      });
+
+      conversationCta.href = `mailto:hello@orveax.com?subject=${encodeURIComponent(selected.mailSubject)}`;
+      localStorage.setItem('orveax-lang', lang);
+      currentLang = lang;
+    }
+
+    langToggle.addEventListener('click', () => {
+      applyLanguage(currentLang === 'en' ? 'ar' : 'en');
+    });
+
+    applyLanguage(currentLang);
+
+    // Founder LinkedIn URL intentionally remains disabled until the exact profile URL is verified.
+    // Once verified, set the URL below and the button will activate automatically.
+    const founderLinkedInUrl = '';
+    const linkedinCta = document.getElementById('linkedinCta');
+
+    if (founderLinkedInUrl) {
+      linkedinCta.href = founderLinkedInUrl;
+      linkedinCta.target = '_blank';
+      linkedinCta.rel = 'noopener noreferrer';
+      linkedinCta.removeAttribute('aria-disabled');
+      linkedinCta.removeAttribute('tabindex');
+      linkedinCta.removeAttribute('title');
+    }
+  </script>
+</body>
+</html>
