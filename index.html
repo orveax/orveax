@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#07101d" />
+  <meta name="theme-color" content="#06111e" />
   <title>ORVEAX | Business Structuring & Digital Foundation</title>
   <meta name="description" content="ORVEAX helps growing companies structure how they operate and build the operational and digital foundation required for clearer execution and controlled growth." />
   <link rel="canonical" href="https://orveax.com/" />
@@ -17,17 +17,22 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #07101d;
-      --bg-deep: #040a12;
-      --line: rgba(185, 204, 225, .14);
-      --line-strong: rgba(185, 204, 225, .24);
-      --text: #f2f6fa;
-      --muted: #a8b4c2;
-      --soft: #7e8b99;
-      --accent: #c8a45f;
-      --accent-soft: rgba(200,164,95,.14);
-      --max: 1220px;
-      --radius: 18px;
+      --bg: #06111e;
+      --bg-deep: #030811;
+      --panel: rgba(8, 20, 35, .82);
+      --text: #f4f7fb;
+      --text-soft: #d7dee8;
+      --muted: #a6b1bf;
+      --muted-2: #6f7d8d;
+      --line: rgba(191, 207, 225, .11);
+      --line-strong: rgba(191, 207, 225, .22);
+      --gold: #d7ae5d;
+      --gold-2: #f0cc7e;
+      --gold-soft: rgba(215, 174, 93, .15);
+      --blue-soft: rgba(64, 107, 151, .14);
+      --max: 1180px;
+      --radius: 24px;
+      --ease: cubic-bezier(.2,.72,.2,1);
     }
 
     * { box-sizing: border-box; }
@@ -37,8 +42,8 @@
       min-height: 100svh;
       color: var(--text);
       background:
-        radial-gradient(circle at 78% 24%, rgba(42, 86, 132, .12), transparent 32%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+        radial-gradient(circle at 72% 8%, rgba(44, 80, 120, .14), transparent 28rem),
+        linear-gradient(180deg, #071422 0%, var(--bg) 44%, var(--bg-deep) 100%);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       overflow-x: hidden;
     }
@@ -47,355 +52,567 @@
       content: "";
       position: fixed;
       inset: 0;
+      z-index: 0;
       pointer-events: none;
-      opacity: .32;
+      opacity: .34;
       background-image:
         linear-gradient(var(--line) 1px, transparent 1px),
         linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black 0%, rgba(0,0,0,.7) 58%, transparent 100%);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.82) 76%, transparent 100%);
     }
 
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
 
-    .page {
-      width: min(calc(100% - 40px), var(--max));
-      min-height: 100svh;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+    .site {
       position: relative;
       z-index: 1;
+      min-height: 100svh;
+      overflow: hidden;
     }
 
-    .topbar {
-      min-height: 92px;
+    .container {
+      width: min(calc(100% - 44px), var(--max));
+      margin-inline: auto;
+      position: relative;
+    }
+
+    .planet {
+      position: absolute;
+      width: 760px;
+      height: 760px;
+      border-radius: 50%;
+      top: -460px;
+      right: -330px;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 33% 35%, rgba(78, 111, 145, .28), rgba(14, 31, 49, .9) 48%, #050b12 76%);
+      border: 1px solid rgba(232, 191, 107, .62);
+      box-shadow:
+        -9px 8px 38px rgba(215, 174, 93, .22),
+        inset 38px -34px 90px rgba(0,0,0,.48),
+        inset -20px 12px 70px rgba(64, 100, 134, .18);
+    }
+
+    .planet::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: .34;
+      background:
+        repeating-radial-gradient(circle at 50% 45%, transparent 0 20px, rgba(255,255,255,.035) 21px 22px),
+        linear-gradient(130deg, transparent 30%, rgba(255,255,255,.035) 45%, transparent 61%);
+      mask-image: linear-gradient(90deg, rgba(0,0,0,.15), #000);
+    }
+
+    header {
+      min-height: 112px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      gap: 22px;
     }
 
-    .wordmark {
+    .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-size: 1.02rem;
-      font-weight: 760;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      white-space: nowrap;
+      gap: 18px;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
     }
 
-    .wordmark-mark {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--line-strong);
+    .brand-mark {
+      width: 48px;
+      height: 48px;
       position: relative;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(194, 207, 223, .42);
       transform: rotate(45deg);
     }
 
-    .wordmark-mark::before,
-    .wordmark-mark::after {
-      content: "";
-      position: absolute;
-      background: var(--accent);
+    .brand-mark::after {
+      inset: 3px 22px;
+      border: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--gold-2), var(--gold));
+      box-shadow: 0 0 14px rgba(215,174,93,.22);
     }
 
-    .wordmark-mark::before { width: 1px; height: 42px; left: 13px; top: -8px; }
-    .wordmark-mark::after { height: 1px; width: 42px; top: 13px; left: -8px; }
+    .brand-mark span::before,
+    .brand-mark span::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      top: 23px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold-2), var(--gold));
+      transform: rotate(45deg);
+      transform-origin: center;
+    }
+
+    .brand-mark span::after { transform: rotate(-45deg); }
+
+    .brand-name {
+      font-size: 1.08rem;
+      font-weight: 720;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+    }
 
     .lang-toggle {
       display: inline-flex;
       align-items: center;
       padding: 4px;
-      border: 1px solid var(--line-strong);
+      border: 1px solid rgba(216, 225, 235, .28);
       border-radius: 999px;
-      background: rgba(255,255,255,.025);
+      background: rgba(3, 9, 16, .36);
       backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 3;
     }
 
     .lang-toggle button {
-      border: 0;
-      color: var(--muted);
-      background: transparent;
-      min-width: 48px;
-      height: 34px;
+      min-width: 58px;
+      height: 40px;
       border-radius: 999px;
+      border: 0;
+      background: transparent;
+      color: #8f9baa;
       font: inherit;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .08em;
+      font-size: .8rem;
+      font-weight: 760;
+      letter-spacing: .07em;
       cursor: pointer;
+      transition: .22s ease;
     }
 
     .lang-toggle button[aria-pressed="true"] {
-      color: var(--text);
-      background: rgba(255,255,255,.08);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
+      color: #fff;
+      background: rgba(255,255,255,.045);
+      box-shadow:
+        inset 0 0 0 1px rgba(230, 190, 106, .85),
+        0 0 24px rgba(215, 174, 93, .12);
     }
 
-    main {
-      flex: 1;
-      display: grid;
-      place-items: center;
-      padding: 72px 0 64px;
-    }
+    main { padding: 66px 0 82px; }
 
     .hero {
-      width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
-      gap: clamp(44px, 7vw, 96px);
-      align-items: center;
+      position: relative;
+      max-width: 980px;
+      padding-right: 160px;
     }
 
     .eyebrow {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-      color: var(--accent);
-      font-size: .72rem;
+      gap: 18px;
+      margin-bottom: 28px;
+      color: var(--gold-2);
+      font-size: .74rem;
+      line-height: 1.4;
       font-weight: 760;
-      letter-spacing: .18em;
+      letter-spacing: .22em;
       text-transform: uppercase;
     }
 
     .eyebrow::before {
       content: "";
-      width: 38px;
+      width: 56px;
       height: 1px;
-      background: var(--accent);
-      opacity: .8;
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(215,174,93,.22);
+      flex: 0 0 auto;
     }
 
-    h1 {
+    .headline {
       margin: 0;
-      max-width: 760px;
-      font-size: clamp(3.1rem, 6.6vw, 6.7rem);
-      line-height: .91;
-      letter-spacing: -.06em;
-      font-weight: 680;
+      max-width: 900px;
+      font-size: clamp(4.4rem, 8.8vw, 8.6rem);
+      line-height: .84;
+      letter-spacing: -.065em;
+      font-weight: 690;
     }
 
-    h1 span { display: block; }
-    h1 .line-2 { color: rgba(242,246,250,.54); }
+    .headline .foundation,
+    .headline .second-line { display: block; }
+    .headline .foundation { color: #f6f8fb; }
+    .headline .to { color: #8d98a7; }
+    .headline .function {
+      color: var(--gold-2);
+      text-shadow: 0 10px 48px rgba(215,174,93,.08);
+    }
 
     .support {
-      max-width: 690px;
-      margin: 30px 0 0;
+      max-width: 760px;
+      margin: 36px 0 0;
       color: var(--muted);
-      font-size: clamp(1rem, 1.35vw, 1.16rem);
-      line-height: 1.75;
+      font-size: clamp(1.08rem, 1.9vw, 1.34rem);
+      line-height: 1.62;
+      letter-spacing: -.01em;
       text-wrap: balance;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
+      gap: 18px;
+      margin-top: 38px;
     }
 
     .btn {
-      min-height: 50px;
-      padding: 0 20px;
+      min-height: 60px;
+      padding: 0 28px;
+      border-radius: 15px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      border-radius: 10px;
+      gap: 14px;
       text-decoration: none;
-      font-size: .88rem;
-      font-weight: 700;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
+      font-size: .98rem;
+      font-weight: 760;
+      transition: transform .22s var(--ease), box-shadow .22s ease, border-color .22s ease, background .22s ease;
     }
 
     .btn:hover { transform: translateY(-2px); }
-    .btn:focus-visible, .lang-toggle button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
+    .btn:focus-visible,
+    .lang-toggle button:focus-visible {
+      outline: 2px solid var(--gold-2);
+      outline-offset: 4px;
     }
 
     .btn-primary {
-      background: var(--text);
-      color: #09111b;
-      border: 1px solid var(--text);
+      min-width: 260px;
+      color: #121317;
+      border: 1px solid #f2cf83;
+      background: linear-gradient(135deg, #f3d486 0%, #d9aa55 58%, #c6913e 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.6),
+        0 12px 42px rgba(215,174,93,.18);
     }
 
-    .btn-primary:hover { background: #fff; }
+    .btn-primary:hover {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.7),
+        0 18px 50px rgba(215,174,93,.27);
+    }
 
     .btn-secondary {
-      color: var(--text);
-      border: 1px solid var(--line-strong);
-      background: rgba(255,255,255,.025);
+      min-width: 180px;
+      color: #f0f3f7;
+      border: 1px solid rgba(200, 214, 230, .26);
+      background: rgba(6, 15, 26, .56);
     }
 
     .btn-secondary:hover {
-      border-color: rgba(200,164,95,.48);
-      background: var(--accent-soft);
+      border-color: rgba(215,174,93,.42);
+      background: rgba(215,174,93,.055);
     }
 
-    .philosophy {
-      margin-top: 46px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(255,255,255,.07);
-      display: flex;
-      align-items: center;
+    .linkedin-badge {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(220,230,241,.36);
+      border-radius: 5px;
+      display: grid;
+      place-items: center;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .hero-side-label {
+      position: absolute;
+      top: 122px;
+      right: 0;
+      color: #8290a1;
+      display: grid;
       gap: 12px;
-      flex-wrap: wrap;
-      color: #c6d0da;
-      font-size: .77rem;
-      font-weight: 650;
-      letter-spacing: .08em;
+      font-size: .68rem;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .hero-side-label::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 2px;
+    }
+
+    .method {
+      margin-top: 62px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(210,220,232,.11);
+      border-bottom: 1px solid rgba(210,220,232,.11);
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      align-items: center;
+      justify-content: start;
+      gap: 24px;
+      color: #d8dee7;
+      font-size: .78rem;
+      font-weight: 760;
+      letter-spacing: .18em;
       text-transform: uppercase;
     }
 
-    .philosophy .sep {
-      width: 28px;
-      height: 1px;
-      background: var(--line-strong);
-      position: relative;
+    .method-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      white-space: nowrap;
     }
 
-    .philosophy .sep::after {
+    .method-step:not(:last-child)::after {
       content: "";
-      position: absolute;
-      right: -1px;
-      top: -2px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
+      width: 78px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(215,174,93,.72), rgba(215,174,93,.18));
+      box-shadow: 76px 0 0 -1px var(--gold);
     }
 
-    .visual {
+    .system-section { margin-top: 54px; }
+
+    .system-panel {
       position: relative;
-      min-height: 470px;
-      border: 1px solid rgba(255,255,255,.075);
-      border-radius: var(--radius);
+      min-height: 760px;
       overflow: hidden;
+      border: 1px solid rgba(196, 211, 228, .22);
+      border-radius: var(--radius);
       background:
-        linear-gradient(rgba(255,255,255,.02), rgba(255,255,255,.01)),
-        radial-gradient(circle at 58% 42%, rgba(68,118,168,.13), transparent 45%);
-      box-shadow: 0 40px 90px rgba(0,0,0,.28);
+        radial-gradient(circle at 50% 48%, rgba(35,77,116,.12), transparent 32%),
+        linear-gradient(180deg, rgba(8,21,36,.88), rgba(4,13,23,.9));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.018),
+        0 40px 90px rgba(0,0,0,.28);
       isolation: isolate;
     }
 
-    .visual::before {
+    .system-panel::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: .72;
       z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,.046) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.046) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: .78;
     }
 
-    .visual-label {
-      position: absolute;
-      left: 22px;
-      top: 20px;
-      color: var(--soft);
-      font-size: .64rem;
-      letter-spacing: .16em;
+    .panel-top {
+      min-height: 78px;
+      padding: 0 30px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: #8795a6;
+      font-size: .68rem;
+      letter-spacing: .24em;
       text-transform: uppercase;
-      z-index: 2;
     }
 
-    .visual-meta {
-      position: absolute;
-      right: 22px;
-      bottom: 18px;
-      color: var(--soft);
-      font-size: .62rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      z-index: 2;
+    .panel-meta {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .panel-meta::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .map-wrap {
+      position: relative;
+      min-height: 680px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
     }
 
     .system-map {
-      width: 100%;
-      height: 100%;
-      min-height: 470px;
-      display: block;
+      width: min(100%, 860px);
+      height: auto;
+      overflow: visible;
+      filter: drop-shadow(0 24px 70px rgba(0,0,0,.24));
     }
 
-    .system-map .wire {
-      fill: none;
-      stroke: rgba(166, 191, 218, .32);
-      stroke-width: 1.25;
-      stroke-dasharray: 7 8;
-      animation: dash 20s linear infinite;
-    }
-
-    .system-map .wire-accent {
-      fill: none;
-      stroke: rgba(200,164,95,.62);
-      stroke-width: 1.5;
-    }
-
-    .system-map .node {
-      fill: #0a1625;
-      stroke: rgba(220,231,241,.44);
-      stroke-width: 1.2;
-    }
-
-    .system-map .node-accent {
-      fill: var(--accent);
-      stroke: rgba(255,255,255,.44);
-      stroke-width: 1.1;
+    .system-map .axis {
+      stroke: rgba(191,207,225,.14);
+      stroke-width: 1;
+      stroke-dasharray: 2 5;
     }
 
     .system-map .ring {
       fill: none;
-      stroke: rgba(200,164,95,.28);
-      stroke-width: 1;
-      animation: pulse 4.6s ease-in-out infinite;
+      stroke: rgba(215,174,93,.16);
+      stroke-width: 1.1;
     }
 
-    @keyframes dash { to { stroke-dashoffset: -180; } }
-    @keyframes pulse { 0%,100% { opacity:.28; } 50% { opacity:.8; } }
+    .system-map .ring-strong {
+      fill: none;
+      stroke: rgba(215,174,93,.34);
+      stroke-width: 1.3;
+    }
 
-    .status-row {
-      grid-column: 1 / -1;
-      margin-top: 4px;
-      padding-top: 22px;
+    .system-map .wire {
+      fill: none;
+      stroke: rgba(177, 199, 222, .52);
+      stroke-width: 1.4;
+      stroke-dasharray: 9 10;
+      animation: drift 22s linear infinite;
+    }
+
+    .system-map .wire-gold {
+      fill: none;
+      stroke: rgba(233, 190, 104, .94);
+      stroke-width: 1.75;
+    }
+
+    .system-map .node {
+      fill: #091827;
+      stroke: rgba(211, 224, 238, .8);
+      stroke-width: 2;
+    }
+
+    .system-map .node-gold {
+      fill: #0d1a27;
+      stroke: var(--gold-2);
+      stroke-width: 2;
+    }
+
+    .system-map .core-halo {
+      fill: rgba(215,174,93,.12);
+      stroke: rgba(235,196,116,.2);
+      stroke-width: 1;
+      animation: pulse 4.4s ease-in-out infinite;
+    }
+
+    .system-map .core {
+      fill: url(#coreGold);
+      stroke: #ffe1a0;
+      stroke-width: 2;
+      filter: drop-shadow(0 0 15px rgba(215,174,93,.6));
+    }
+
+    .system-map text {
+      fill: #a6b2c1;
+      font-size: 15px;
+      letter-spacing: 3px;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    }
+
+    .panel-note {
+      position: absolute;
+      left: 34px;
+      bottom: 30px;
+      color: #8593a4;
+      font-size: .66rem;
+      letter-spacing: .28em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    .panel-note::before,
+    .coordinates::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .coordinates {
+      position: absolute;
+      right: 34px;
+      bottom: 30px;
+      color: #758496;
+      text-align: right;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      line-height: 1.7;
+      text-transform: uppercase;
+    }
+
+    .coordinates::before { margin-left: auto; }
+
+    .status-line {
+      margin-top: 26px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      color: var(--soft);
-      font-size: .74rem;
-      letter-spacing: .03em;
+      gap: 20px;
+      color: #738091;
+      font-size: .73rem;
     }
 
     .status {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
     }
 
     .status-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 5px rgba(200,164,95,.08);
+      background: var(--gold);
+      box-shadow: 0 0 0 5px rgba(215,174,93,.08);
     }
 
+    .statement {
+      margin: 72px auto 0;
+      display: grid;
+      grid-template-columns: minmax(50px, 1fr) auto minmax(50px, 1fr);
+      gap: 28px;
+      align-items: center;
+      color: #d7dde6;
+      font-size: .72rem;
+      font-weight: 650;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .statement::before,
+    .statement::after {
+      content: "";
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .statement::after { background: linear-gradient(90deg, var(--gold), transparent); }
+
     footer {
-      min-height: 74px;
-      border-top: 1px solid rgba(255,255,255,.06);
+      margin-top: 50px;
+      border-top: 1px solid rgba(255,255,255,.055);
+      min-height: 88px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      color: var(--soft);
+      color: #667485;
       font-size: .72rem;
     }
 
@@ -407,58 +624,102 @@
     }
 
     .footer-links a {
-      color: inherit;
       text-decoration: none;
+      color: inherit;
       transition: color .2s ease;
     }
 
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover { color: #e7ebf0; }
+
     [data-lang="ar"] { display: none; }
 
     html[lang="ar"] body { font-family: Tahoma, Arial, "Segoe UI", sans-serif; }
-    html[dir="rtl"] .eyebrow { letter-spacing: 0; text-transform: none; font-weight: 700; }
-    html[dir="rtl"] .eyebrow::before { order: 2; }
-    html[dir="rtl"] h1 { letter-spacing: -.045em; }
-    html[dir="rtl"] .support { line-height: 1.95; }
-    html[dir="rtl"] .philosophy { letter-spacing: 0; text-transform: none; }
-    html[dir="rtl"] .philosophy .sep::after { right: auto; left: -1px; }
-    html[dir="rtl"] .visual-label { left: auto; right: 22px; }
-    html[dir="rtl"] .visual-meta { right: auto; left: 22px; }
+    html[dir="rtl"] .hero { padding-right: 0; padding-left: 160px; }
+    html[dir="rtl"] .hero-side-label { right: auto; left: 0; }
+    html[dir="rtl"] .eyebrow { letter-spacing: 0; text-transform: none; font-size: .9rem; }
+    html[dir="rtl"] .support { line-height: 1.9; }
+    html[dir="rtl"] .method { letter-spacing: 0; text-transform: none; font-size: .9rem; }
+    html[dir="rtl"] .method-step:not(:last-child)::after { box-shadow: -76px 0 0 -1px var(--gold); }
+    html[dir="rtl"] .panel-note { left: auto; right: 34px; text-align: right; }
+    html[dir="rtl"] .coordinates { right: auto; left: 34px; text-align: left; }
+    html[dir="rtl"] .coordinates::before { margin-left: 0; margin-right: auto; }
 
-    @media (max-width: 920px) {
-      .page { width: min(calc(100% - 28px), var(--max)); }
-      .topbar { min-height: 78px; }
-      main { padding: 48px 0 42px; }
-      .hero { grid-template-columns: 1fr; gap: 34px; }
-      .visual, .system-map { min-height: 330px; }
-      h1 { max-width: 680px; }
-      .status-row { margin-top: 0; }
+    @keyframes drift { to { stroke-dashoffset: -220; } }
+    @keyframes pulse { 0%,100% { opacity: .34; } 50% { opacity: .82; } }
+
+    @media (max-width: 980px) {
+      .planet { width: 620px; height: 620px; top: -390px; right: -360px; }
+      header { min-height: 96px; }
+      main { padding-top: 52px; }
+      .hero { padding-right: 0; max-width: 900px; }
+      html[dir="rtl"] .hero { padding-left: 0; }
+      .hero-side-label { display: none; }
+      .headline { font-size: clamp(4rem, 11vw, 7rem); }
+      .method { gap: 18px; }
+      .method-step { gap: 12px; }
+      .method-step:not(:last-child)::after { width: 48px; box-shadow: 46px 0 0 -1px var(--gold); }
+      html[dir="rtl"] .method-step:not(:last-child)::after { box-shadow: -46px 0 0 -1px var(--gold); }
+      .system-panel { min-height: 660px; }
+      .map-wrap { min-height: 580px; }
     }
 
-    @media (max-width: 600px) {
-      body::before { background-size: 36px 36px; }
-      .page { width: min(calc(100% - 24px), var(--max)); }
-      .topbar { min-height: 72px; }
-      .wordmark { font-size: .9rem; letter-spacing: .21em; }
-      .wordmark-mark { width: 24px; height: 24px; }
-      .wordmark-mark::before { left: 11px; top: -7px; height: 36px; }
-      .wordmark-mark::after { top: 11px; left: -7px; width: 36px; }
-      .lang-toggle button { min-width: 42px; height: 32px; }
-      main { display: block; padding: 46px 0 34px; }
-      .hero { display: flex; flex-direction: column; align-items: stretch; }
-      .copy { order: 1; }
-      .visual { order: 2; min-height: 265px; border-radius: 14px; }
-      .system-map { min-height: 265px; }
-      .status-row { order: 3; flex-direction: column; gap: 8px; padding-top: 4px; }
-      .eyebrow { margin-bottom: 18px; font-size: .65rem; letter-spacing: .13em; }
-      h1 { font-size: clamp(3rem, 15vw, 4.6rem); }
-      .support { margin-top: 22px; font-size: .98rem; line-height: 1.68; }
-      .actions { margin-top: 28px; flex-direction: column; }
-      .btn { width: 100%; }
-      .philosophy { margin-top: 32px; padding-top: 18px; gap: 9px; font-size: .64rem; }
-      .philosophy .sep { width: 18px; }
-      footer { min-height: auto; padding: 22px 0 26px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    @media (max-width: 680px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .planet { width: 500px; height: 500px; top: -320px; right: -340px; opacity: .85; }
+      header { min-height: 86px; }
+      .brand { gap: 13px; }
+      .brand-mark { width: 39px; height: 39px; }
+      .brand-name { font-size: .92rem; letter-spacing: .31em; }
+      .lang-toggle button { min-width: 47px; height: 35px; font-size: .72rem; }
+      main { padding: 46px 0 62px; }
+      .eyebrow { gap: 12px; margin-bottom: 26px; font-size: .64rem; letter-spacing: .17em; }
+      .eyebrow::before { width: 38px; }
+      .headline { font-size: clamp(3.8rem, 17.5vw, 6rem); line-height: .88; }
+      .support { margin-top: 30px; font-size: 1rem; line-height: 1.72; }
+      .actions { margin-top: 32px; flex-direction: column; gap: 12px; }
+      .btn { width: 100%; min-height: 58px; }
+      .method {
+        margin-top: 44px;
+        padding: 25px 0;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        font-size: .63rem;
+        letter-spacing: .12em;
+        text-align: center;
+      }
+      .method-step { display: flex; justify-content: center; gap: 8px; min-width: 0; }
+      .method-step:not(:last-child)::after { width: 14px; box-shadow: 13px 0 0 -1px var(--gold); }
+      html[dir="rtl"] .method { font-size: .76rem; }
+      html[dir="rtl"] .method-step:not(:last-child)::after { box-shadow: -13px 0 0 -1px var(--gold); }
+      .system-section { margin-top: 34px; }
+      .system-panel { min-height: 570px; border-radius: 20px; }
+      .panel-top { min-height: 66px; padding: 0 18px; font-size: .56rem; letter-spacing: .16em; }
+      .panel-meta { gap: 10px; }
+      .panel-meta::before { width: 20px; }
+      .map-wrap { min-height: 500px; padding: 10px 4px 64px; }
+      .system-map { width: 113%; max-width: none; }
+      .system-map text { font-size: 13px; letter-spacing: 2px; }
+      .panel-note, .coordinates { bottom: 20px; font-size: .54rem; }
+      .panel-note { left: 20px; }
+      .coordinates { right: 20px; }
+      html[dir="rtl"] .panel-note { right: 20px; }
+      html[dir="rtl"] .coordinates { left: 20px; }
+      .status-line { flex-direction: column; align-items: flex-start; gap: 8px; font-size: .68rem; }
+      .statement { margin-top: 52px; gap: 12px; font-size: .57rem; letter-spacing: .24em; }
+      footer { min-height: auto; padding: 25px 0 10px; flex-direction: column; align-items: flex-start; gap: 12px; }
       .footer-links { gap: 14px; }
+    }
+
+    @media (max-width: 430px) {
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .brand-name { letter-spacing: .25em; }
+      .planet { right: -365px; }
+      .headline { font-size: clamp(3.45rem, 17vw, 4.6rem); }
+      .method { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+      .method-step:nth-child(2)::after { display: none; }
+      .system-panel { min-height: 520px; }
+      .map-wrap { min-height: 455px; }
+      .statement { white-space: normal; line-height: 1.7; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -472,104 +733,155 @@
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar" aria-label="Primary">
-      <div class="wordmark" aria-label="ORVEAX">
-        <span class="wordmark-mark" aria-hidden="true"></span>
-        <span>ORVEAX</span>
-      </div>
+  <div class="site">
+    <div class="planet" aria-hidden="true"></div>
 
-      <div class="lang-toggle" aria-label="Language switcher">
-        <button type="button" data-switch="en" aria-pressed="true">EN</button>
-        <button type="button" data-switch="ar" aria-pressed="false">AR</button>
-      </div>
-    </header>
+    <div class="container">
+      <header>
+        <a class="brand" href="https://orveax.com/" aria-label="ORVEAX home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <span class="brand-name">ORVEAX</span>
+        </a>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="copy">
+        <div class="lang-toggle" aria-label="Language switcher">
+          <button type="button" data-switch="en" aria-pressed="true">EN</button>
+          <button type="button" data-switch="ar" aria-pressed="false">AR</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
           <div class="eyebrow">
             <span data-lang="en">Business Structuring &amp; Digital Foundation</span>
             <span data-lang="ar">هيكلة الأعمال وبناء الأساس الرقمي</span>
           </div>
 
-          <h1 id="hero-title" aria-label="Foundation to Function">
-            <span>Foundation</span>
-            <span class="line-2">to Function.</span>
+          <h1 class="headline" id="hero-title" aria-label="Foundation to Function">
+            <span class="foundation">Foundation</span>
+            <span class="second-line"><span class="to">to</span> <span class="function">Function.</span></span>
           </h1>
 
-          <p class="support" data-lang="en">ORVEAX helps growing companies structure how they operate and build the operational and digital foundation required for clearer execution and controlled growth.</p>
-          <p class="support" data-lang="ar">تساعد ORVEAX الشركات النامية على تنظيم طريقة عملها وبناء الأساس التشغيلي والرقمي اللازم لتنفيذ أكثر وضوحًا ونمو أكثر انضباطًا.</p>
+          <p class="support" data-lang="en">
+            ORVEAX helps growing companies structure how they operate and build the operational and digital foundation required for clearer execution and controlled growth.
+          </p>
+          <p class="support" data-lang="ar">
+            تساعد ORVEAX الشركات النامية على تنظيم طريقة عملها وبناء الأساس التشغيلي والرقمي اللازم لتنفيذ أكثر وضوحًا ونمو أكثر انضباطًا.
+          </p>
 
           <div class="actions">
             <a class="btn btn-primary" href="mailto:hello@orveax.com?subject=Book%20a%20Conversation%20with%20ORVEAX">
               <span data-lang="en">Book a Conversation</span>
               <span data-lang="ar">رتّب محادثة</span>
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <span class="linkedin-badge" aria-hidden="true">in</span>
+              <span>LinkedIn</span>
               <span aria-hidden="true">↗</span>
             </a>
-            <a class="btn btn-secondary" href="https://www.linkedin.com/in/mohamed-adel-abdelkarim" target="_blank" rel="noopener noreferrer">
-              <span>LinkedIn</span><span aria-hidden="true">↗</span>
-            </a>
           </div>
 
-          <div class="philosophy" aria-label="ORVEAX approach">
-            <span data-lang="en">Understand</span><span data-lang="ar">نفهم</span>
-            <span class="sep" aria-hidden="true"></span>
-            <span data-lang="en">Design</span><span data-lang="ar">نصمّم</span>
-            <span class="sep" aria-hidden="true"></span>
-            <span data-lang="en">Build</span><span data-lang="ar">نبني</span>
-            <span class="sep" aria-hidden="true"></span>
-            <span data-lang="en">Enable</span><span data-lang="ar">نُمكّن</span>
+          <div class="hero-side-label" aria-hidden="true">
+            <span>People</span>
+            <span>Systems</span>
+            <span>Growth</span>
           </div>
-        </div>
+        </section>
 
-        <div class="visual" aria-label="Structured connected system graphic">
-          <div class="visual-label">ORVEAX / SYSTEM MAP</div>
-          <svg class="system-map" viewBox="0 0 520 520" aria-hidden="true">
-            <path class="wire" d="M68 365 L152 279 L247 321 L318 206 L441 153" />
-            <path class="wire" d="M91 118 L182 182 L318 206 L392 326 L469 391" />
-            <path class="wire" d="M152 279 L182 182 L274 107 L441 153" />
-            <path class="wire" d="M247 321 L392 326 L441 153" />
-            <path class="wire-accent" d="M91 118 L182 182 L318 206 L441 153" />
-            <circle class="ring" cx="318" cy="206" r="56" />
-            <circle class="ring" cx="318" cy="206" r="91" opacity=".45" />
-            <circle class="node" cx="68" cy="365" r="8" />
-            <circle class="node" cx="152" cy="279" r="10" />
-            <circle class="node" cx="247" cy="321" r="8" />
-            <circle class="node-accent" cx="318" cy="206" r="9" />
-            <circle class="node" cx="441" cy="153" r="10" />
-            <circle class="node" cx="91" cy="118" r="7" />
-            <circle class="node" cx="182" cy="182" r="7" />
-            <circle class="node" cx="274" cy="107" r="6" />
-            <circle class="node" cx="392" cy="326" r="8" />
-            <circle class="node" cx="469" cy="391" r="6" />
-            <g opacity=".5" fill="none" stroke="rgba(200,164,95,.6)" stroke-width="1">
-              <path d="M36 58 H114" /><path d="M36 58 V136" />
-              <path d="M484 462 H406" /><path d="M484 462 V384" />
-            </g>
-          </svg>
-          <div class="visual-meta">STRUCTURE / CONNECTION / PROGRESSION</div>
-        </div>
+        <section class="method" aria-label="ORVEAX approach">
+          <span class="method-step"><span data-lang="en">Understand</span><span data-lang="ar">نفهم</span></span>
+          <span class="method-step"><span data-lang="en">Design</span><span data-lang="ar">نصمّم</span></span>
+          <span class="method-step"><span data-lang="en">Build</span><span data-lang="ar">نبني</span></span>
+          <span class="method-step"><span data-lang="en">Enable</span><span data-lang="ar">نُمكّن</span></span>
+        </section>
 
-        <div class="status-row">
-          <div class="status">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span data-lang="en">New ORVEAX digital presence in development.</span>
-            <span data-lang="ar">الحضور الرقمي الجديد لـ ORVEAX قيد التطوير.</span>
+        <section class="system-section" aria-label="ORVEAX system map">
+          <div class="system-panel">
+            <div class="panel-top">
+              <span>ORVEAX / SYSTEM MAP</span>
+              <span class="panel-meta">PEOPLE &nbsp; SYSTEMS &nbsp; GROWTH</span>
+            </div>
+
+            <div class="map-wrap">
+              <svg class="system-map" viewBox="0 0 900 700" role="img" aria-label="ORVEAX structured system map">
+                <defs>
+                  <radialGradient id="coreGold" cx="38%" cy="32%" r="72%">
+                    <stop offset="0%" stop-color="#fff1bd" />
+                    <stop offset="38%" stop-color="#e6bd67" />
+                    <stop offset="100%" stop-color="#ae7629" />
+                  </radialGradient>
+                </defs>
+
+                <line class="axis" x1="450" y1="55" x2="450" y2="645" />
+                <line class="axis" x1="110" y1="350" x2="790" y2="350" />
+
+                <circle class="ring" cx="450" cy="350" r="85" />
+                <circle class="ring-strong" cx="450" cy="350" r="135" />
+                <circle class="ring" cx="450" cy="350" r="192" />
+                <circle class="ring" cx="450" cy="350" r="255" />
+
+                <path class="wire" d="M284 170 L646 188 L720 404 L604 590 L280 550 L177 336 Z" />
+                <path class="wire" d="M284 170 L450 350 L604 590" />
+                <path class="wire" d="M177 336 L450 350 L646 188" />
+                <path class="wire-gold" d="M284 170 L450 350 L646 188" />
+                <path class="wire-gold" d="M450 350 L720 404" />
+
+                <circle class="core-halo" cx="450" cy="350" r="48" />
+                <circle class="core" cx="450" cy="350" r="25" />
+
+                <circle class="node" cx="284" cy="170" r="18" />
+                <circle class="node" cx="646" cy="188" r="18" />
+                <circle class="node" cx="720" cy="404" r="18" />
+                <circle class="node" cx="604" cy="590" r="18" />
+                <circle class="node" cx="280" cy="550" r="18" />
+                <circle class="node" cx="177" cy="336" r="18" />
+
+                <circle cx="450" cy="84" r="3" fill="#e7bd68" />
+                <circle cx="450" cy="616" r="3" fill="#e7bd68" />
+                <circle cx="128" cy="350" r="3" fill="#e7bd68" />
+                <circle cx="772" cy="350" r="3" fill="#e7bd68" />
+
+                <text x="309" y="152">OPERATIONS</text>
+                <text x="678" y="181">PEOPLE</text>
+                <text x="750" y="410">TECHNOLOGY</text>
+                <text x="633" y="598">GROWTH</text>
+                <text x="147" y="574">GOVERNANCE</text>
+                <text x="66" y="345">STRATEGY</text>
+              </svg>
+
+              <div class="panel-note">Structure<br>Align<br>Execute<br>Scale</div>
+              <div class="coordinates">25.2048° N<br>55.2708° E</div>
+            </div>
           </div>
-          <span>orveax.com</span>
-        </div>
-      </section>
-    </main>
 
-    <footer>
-      <span>© 2026 ORVEAX</span>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="https://orveax.com/">orveax.com</a>
-        <a href="mailto:hello@orveax.com">hello@orveax.com</a>
-        <a href="https://www.linkedin.com/in/mohamed-adel-abdelkarim" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-      </nav>
-    </footer>
+          <div class="status-line">
+            <div class="status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span data-lang="en">New ORVEAX digital presence in development.</span>
+              <span data-lang="ar">الحضور الرقمي الجديد لـ ORVEAX قيد التطوير.</span>
+            </div>
+            <span>orveax.com</span>
+          </div>
+        </section>
+
+        <div class="statement">
+          <span></span>
+          <span data-lang="en">A Stronger Tomorrow, By Design.</span>
+          <span data-lang="ar">غدٌ أقوى، بتصميمٍ مقصود.</span>
+          <span></span>
+        </div>
+      </main>
+
+      <footer>
+        <span>© 2026 ORVEAX</span>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="https://orveax.com/">orveax.com</a>
+          <a href="mailto:hello@orveax.com">hello@orveax.com</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        </nav>
+      </footer>
+    </div>
   </div>
 
   <script>
